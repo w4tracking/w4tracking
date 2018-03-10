@@ -12,6 +12,13 @@ before_script:
 
 script:
   - mvn clean test
+  - sonar-scanner
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+addons:
+  sonarcloud:
+    organization: "w4tracking"
+    token:
+      secure: $SONAR_TOKEN
