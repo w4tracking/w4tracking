@@ -11,8 +11,11 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - mvn clean test
+  - mvn clean package
   - sonar-scanner
+
+after_success:
+  - mvn clean cobertura:cobertura
 
 after_script:
   - ./cc-test-reporter after-build -t cobertura --exit-code $TRAVIS_TEST_RESULT
