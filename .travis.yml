@@ -15,7 +15,7 @@ script:
   - sonar-scanner
 
 after_script:
-  - ./cc-test-reporter after-build -t covertura --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t cobertura --exit-code $TRAVIS_TEST_RESULT
 
 addons:
   sonarcloud:
