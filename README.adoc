@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/w4tracking/w4tracking.svg?branch=master)](https://travis-ci.org/w4tracking/w4tracking)
+
 = REST API Level 0 - WildFly Swarm Booster
 
 IMPORTANT: This booster requires Java 8 JDK or greater and Maven 3.3.x.
