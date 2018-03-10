@@ -19,6 +19,6 @@ after_script:
 
 addons:
   sonarcloud:
-    organization: "w4tracking"
+    organization: w4tracking
     token:
       secure: $SONAR_TOKEN
