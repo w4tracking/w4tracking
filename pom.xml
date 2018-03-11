@@ -28,7 +28,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>WildFly Swarm Booster - REST API Level 0 Mission</name>
+  <name>W4Tracking REST API</name>
 
   <properties>
     <version.wildfly.swarm>2018.3.3</version.wildfly.swarm>
@@ -128,6 +128,14 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>${version.mysql}</version>
     </dependency>
+
+    <!--Cobertura-->
+    <dependency>
+      <groupId>net.sourceforge.cobertura</groupId>
+      <artifactId>cobertura</artifactId>
+      <version>2.1.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -173,6 +181,23 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+
+        <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.4.0.905</version>
+        </plugin>
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.0</version>
+            <configuration>
+                <excludes>
+                    <exclude>**Test.class</exclude>
+                </excludes>
+            </configuration>
+        </plugin>
+
     </plugins>
   </build>
 
