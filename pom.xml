@@ -31,7 +31,7 @@
   <name>WildFly Swarm Booster - REST API Level 0 Mission</name>
 
   <properties>
-    <version.wildfly.swarm>2017.10.0</version.wildfly.swarm>
+    <version.wildfly.swarm>2018.3.3</version.wildfly.swarm>
     <version.resteasy>3.0.19.Final</version.resteasy>
     <version.arquillian.cube>1.9.2</version.arquillian.cube>
 
@@ -45,7 +45,7 @@
     <dependencies>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>bom</artifactId>
+        <artifactId>bom-all</artifactId>
         <version>${version.wildfly.swarm}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -64,16 +64,6 @@
   <dependencies>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
-      <artifactId>jaxrs</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.wildfly.swarm</groupId>
-      <artifactId>monitor</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.wildfly.swarm</groupId>
       <artifactId>microprofile</artifactId>
     </dependency>
     <dependency>
@@ -83,6 +73,11 @@
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>datasources</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>swagger</artifactId>
     </dependency>
 
     <dependency>
@@ -133,14 +128,6 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>${version.mysql}</version>
     </dependency>
-
-    <!--Cobertura-->
-    <dependency>
-      <groupId>net.sourceforge.cobertura</groupId>
-      <artifactId>cobertura</artifactId>
-      <version>2.1.1</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -186,13 +173,6 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>cobertura-maven-plugin</artifactId>
-        <version>2.7</version>
-      </plugin>
-
     </plugins>
   </build>
 
