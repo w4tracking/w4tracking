@@ -1,4 +1,4 @@
-package org.w4tracking.services.resources.models.transaction;
+package org.w4tracking.models.transaction;
 
 public interface W4TrackingTransaction {
 

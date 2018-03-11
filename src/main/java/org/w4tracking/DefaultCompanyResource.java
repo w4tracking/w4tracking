@@ -1,9 +1,9 @@
-package org.w4tracking.services.resources;
+package org.w4tracking;
 
-import org.w4tracking.services.resources.models.transaction.W4TrackingTransaction;
-import org.w4tracking.services.resources.models.transaction.W4Transactional;
-import org.w4tracking.services.resources.representations.idm.CompanyRepresentation;
-import org.w4tracking.services.resources.representations.idm.GenericDataRepresentation;
+import org.w4tracking.models.transaction.W4TrackingTransaction;
+import org.w4tracking.models.transaction.W4Transactional;
+import org.w4tracking.representations.idm.CompanyRepresentation;
+import org.w4tracking.representations.idm.GenericDataRepresentation;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

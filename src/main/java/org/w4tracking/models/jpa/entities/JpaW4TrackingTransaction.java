@@ -1,6 +1,6 @@
-package org.w4tracking.services.resources.models.jpa.entities;
+package org.w4tracking.models.jpa.entities;
 
-import org.w4tracking.services.resources.models.transaction.W4TrackingTransaction;
+import org.w4tracking.models.transaction.W4TrackingTransaction;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;

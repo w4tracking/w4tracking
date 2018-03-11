@@ -1,4 +1,4 @@
-package org.w4tracking.services.resources;
+package org.w4tracking;
 
 import org.junit.runner.RunWith;
 import org.jboss.arquillian.junit.Arquillian;

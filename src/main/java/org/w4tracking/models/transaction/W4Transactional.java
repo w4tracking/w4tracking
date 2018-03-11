@@ -1,4 +1,4 @@
-package org.w4tracking.services.resources.models.transaction;
+package org.w4tracking.models.transaction;
 
 import javax.enterprise.inject.Stereotype;
 import javax.transaction.Transactional;

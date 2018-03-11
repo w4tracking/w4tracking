@@ -1,4 +1,4 @@
-package org.w4tracking.services.resources.representations.idm;
+package org.w4tracking.representations.idm;
 
 import java.util.Map;
 
