@@ -128,14 +128,6 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>${version.mysql}</version>
     </dependency>
-
-    <!--Cobertura-->
-    <dependency>
-      <groupId>net.sourceforge.cobertura</groupId>
-      <artifactId>cobertura</artifactId>
-      <version>2.1.1</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -182,21 +174,23 @@
         </configuration>
       </plugin>
 
-        <plugin>
-            <groupId>org.sonarsource.scanner.maven</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-            <version>3.4.0.905</version>
-        </plugin>
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.0</version>
-            <configuration>
-                <excludes>
-                    <exclude>**Test.class</exclude>
-                </excludes>
-            </configuration>
-        </plugin>
+      <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.4.0.905</version>
+      </plugin>
+      <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.0</version>
+          <configuration>
+              <excludes>
+                <exclude>**/**Test.class</exclude>
+                <exclude>**/**Entity.class</exclude>
+                <exclude>**/**Representation.class</exclude>
+              </excludes>
+          </configuration>
+      </plugin>
 
     </plugins>
   </build>
