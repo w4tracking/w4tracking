@@ -1,4 +1,4 @@
-package org.w4tracking.models.jpa.entities;
+package org.w4tracking.services.resources.models.jpa.entities;
 
 import javax.persistence.Entity;
 import java.io.Serializable;

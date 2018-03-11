@@ -2,8 +2,8 @@ package org.w4tracking.services.resources;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.w4tracking.representations.idm.CompanyRepresentation;
-import org.w4tracking.representations.idm.GenericDataRepresentation;
+import org.w4tracking.services.resources.representations.idm.CompanyRepresentation;
+import org.w4tracking.services.resources.representations.idm.GenericDataRepresentation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
