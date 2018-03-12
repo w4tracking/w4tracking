@@ -3,7 +3,7 @@ package org.w4tracking;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.w4tracking.representations.idm.CompanyRepresentation;
-import org.w4tracking.representations.idm.GenericDataRepresentation;
+import org.w4tracking.representations.idm.Representation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,7 +25,7 @@ public interface CompanyResource {
 
     @GET
     @ApiOperation(value = "Company list")
-    GenericDataRepresentation<List<CompanyRepresentation>> getCompanies();
+    Representation<List<CompanyRepresentation>> getCompanies();
 
     @GET
     @Path("/{companyId}")

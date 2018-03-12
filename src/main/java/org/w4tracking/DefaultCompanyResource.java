@@ -3,7 +3,7 @@ package org.w4tracking;
 import org.w4tracking.models.transaction.W4TrackingTransaction;
 import org.w4tracking.models.transaction.W4Transactional;
 import org.w4tracking.representations.idm.CompanyRepresentation;
-import org.w4tracking.representations.idm.GenericDataRepresentation;
+import org.w4tracking.representations.idm.Representation;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -28,7 +28,7 @@ public class DefaultCompanyResource implements CompanyResource {
     }
 
     @Override
-    public GenericDataRepresentation<List<CompanyRepresentation>> getCompanies() {
+    public Representation<List<CompanyRepresentation>> getCompanies() {
         return null;
     }
 
