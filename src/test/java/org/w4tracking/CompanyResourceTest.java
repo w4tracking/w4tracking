@@ -9,6 +9,11 @@ import org.w4tracking.representations.idm.CompanyAttributes;
 import org.w4tracking.representations.idm.ItemRepresentation;
 import org.wildfly.swarm.arquillian.DefaultDeployment;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,9 +28,9 @@ public class CompanyResourceTest {
     @RunAsClient
     public void createCompanyTest() throws MalformedURLException {
         String apiUrl = "http://localhost:8080/api/companies";
-        CompanyResource companyService = RestClientBuilder.newBuilder()
-                .baseUrl(new URL(apiUrl))
-                .build(CompanyResource.class);
+
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(apiUrl);
 
         ItemRepresentation<CompanyAttributes> company = new ItemRepresentation.Builder<CompanyAttributes>()
                 .withType("company")
@@ -36,7 +41,7 @@ public class CompanyResourceTest {
                 )
                 .build();
 
-        Response response = companyService.createCompany(company);
+        Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.json(company));
 
         assertThat(response.getStatus()).isEqualTo(Response.Status.CREATED);
     }
