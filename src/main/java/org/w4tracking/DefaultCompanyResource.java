@@ -7,15 +7,16 @@ import org.w4tracking.representations.idm.*;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 
 @RequestScoped
-@W4Transactional
+//@W4Transactional
 public class DefaultCompanyResource implements CompanyResource {
 
-    @Inject
-    private W4TrackingTransaction transaction;
+//    @Inject
+//    private W4TrackingTransaction transaction;
 
     @Override
     public Response createCompany(ItemRepresentation<CompanyAttributes> rep) {
@@ -23,7 +24,34 @@ public class DefaultCompanyResource implements CompanyResource {
         Map<String, Object> meta = rep.getMeta();
         Map<String, String> links = rep.getLinks();
 
-        new ItemRepresentation.Builder<CompanyAttributes>()
+        ItemRepresentation<CompanyAttributes> company = new ItemRepresentation.Builder<CompanyAttributes>()
+                .withId(UUID.randomUUID().toString())
+                .withType("company")
+                .withLinks(
+                        new LinksRepresentation.Builder()
+                                .withMeta("withMeta")
+                                .withRelated("withRelated")
+                                .withSelf("withSelf")
+                                .build()
+                )
+                .withAttributes(
+                        new CompanyAttributes.Builder()
+                        .withName("Wolsnut4")
+                        .build()
+                )
+                .build();
+
+        return Response.ok(company).build();
+    }
+
+    @Override
+    public void updateCompany(ItemRepresentation<CompanyAttributes> rep) {
+
+    }
+
+    @Override
+    public ItemRepresentation<CompanyAttributes> getCompanies() {
+        ItemRepresentation<CompanyAttributes> company = new ItemRepresentation.Builder<CompanyAttributes>()
                 .withId(UUID.randomUUID().toString())
                 .withType("company")
                 .withLinks(
@@ -35,17 +63,7 @@ public class DefaultCompanyResource implements CompanyResource {
                 )
                 .withAttributes(new CompanyAttributes())
                 .build();
-        return null;
-    }
-
-    @Override
-    public void updateCompany(ItemRepresentation<CompanyAttributes> rep) {
-
-    }
-
-    @Override
-    public ItemRepresentation<CompanyAttributes> getCompanies() {
-        return null;
+        return company;
     }
 
     @Override

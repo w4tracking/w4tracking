@@ -1,6 +1,8 @@
 package org.w4tracking.representations.idm;
 
-public class LinksRepresentation {
+import java.io.Serializable;
+
+public class LinksRepresentation implements Serializable {
 
     private String self;
     private String meta;

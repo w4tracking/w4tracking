@@ -1,6 +1,8 @@
 package org.w4tracking.representations.idm;
 
-public class DataRepresentation<T extends AttributesRepresentation> {
+import java.io.Serializable;
+
+public class DataRepresentation<T extends AttributesRepresentation> implements Serializable {
 
     private String id;
     private String type;

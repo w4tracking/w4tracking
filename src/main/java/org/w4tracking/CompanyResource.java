@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/companies")
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Api(value = "Company Resource", description = "Company REST API", consumes = "application/json")
 public interface CompanyResource {
 

@@ -1,5 +1,7 @@
 package org.w4tracking.representations.idm;
 
-public interface AttributesRepresentation {
+import java.io.Serializable;
+
+public interface AttributesRepresentation extends Serializable {
 
 }

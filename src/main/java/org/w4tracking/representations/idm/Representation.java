@@ -1,8 +1,9 @@
 package org.w4tracking.representations.idm;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Representation<T> {
+public class Representation<T> implements Serializable {
 
     private T data;
     private Map<String, Object> meta;
