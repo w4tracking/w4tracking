@@ -1,14 +1,16 @@
 package org.w4tracking.representations.idm;
 
-import org.w4tracking.common.Builder;
+public class LinksRepresentation {
 
-public class GenericLinksRepresentation {
+    private String self;
+    private String meta;
+    private String related;
 
-    private final String self;
-    private final String meta;
-    private final String related;
+    public LinksRepresentation() {
 
-    private GenericLinksRepresentation(GenericLinksBuilder builder) {
+    }
+
+    private LinksRepresentation(Builder builder) {
         this.self = builder.self;
         this.meta = builder.meta;
         this.related = builder.related;
@@ -26,29 +28,28 @@ public class GenericLinksRepresentation {
         return related;
     }
 
-    public static class GenericLinksBuilder implements Builder<GenericLinksRepresentation> {
+    public static class Builder {
         private String self;
         private String meta;
         private String related;
 
-        public GenericLinksBuilder self(String self) {
+        public Builder withSelf(String self) {
             this.self = self;
             return this;
         }
 
-        public GenericLinksBuilder meta(String meta) {
+        public Builder withMeta(String meta) {
             this.meta = meta;
             return this;
         }
 
-        public GenericLinksBuilder related(String related) {
+        public Builder withRelated(String related) {
             this.related = related;
             return this;
         }
 
-        @Override
-        public GenericLinksRepresentation build() {
-            return new GenericLinksRepresentation(this);
+        public LinksRepresentation build() {
+            return new LinksRepresentation(this);
         }
     }
 }

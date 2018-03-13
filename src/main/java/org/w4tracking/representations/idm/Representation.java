@@ -1,7 +1,5 @@
 package org.w4tracking.representations.idm;
 
-import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Representation<T> {
@@ -10,10 +8,12 @@ public class Representation<T> {
     private Map<String, Object> meta;
     private Map<String, String> links;
 
-    public Representation(Builder<T> builder) {
-        this.data = builder.data;
-        this.meta  = builder.meta;
-        this.links = builder.links;
+    public Representation() {
+
+    }
+
+    public Representation(T data) {
+        this.data = data;
     }
 
     public T getData() {
@@ -38,33 +38,6 @@ public class Representation<T> {
 
     public void setLinks(Map<String, String> links) {
         this.links = links;
-    }
-
-    public static class Builder<U> implements org.w4tracking.common.Builder<Representation<U>> {
-
-        private U data;
-        private Map<String, Object> meta  = new HashMap<>();
-        private Map<String, String> links  = new HashMap<>();
-
-        @Override
-        public Representation<U> build() {
-            return new Representation<>(this);
-        }
-
-        public Builder withData(U data) {
-            this.data = data;
-            return this;
-        }
-
-        public Builder addLink(String key, URL value) {
-            this.links.put(key, value.toString());
-            return this;
-        }
-
-        public Builder addMeta(String key, Object value) {
-            this.meta.put(key, value);
-            return this;
-        }
     }
 
 }

@@ -2,13 +2,13 @@ package org.w4tracking;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.w4tracking.representations.idm.CompanyRepresentation;
-import org.w4tracking.representations.idm.Representation;
+import org.w4tracking.representations.idm.CollectionRepresentation;
+import org.w4tracking.representations.idm.CompanyAttributes;
+import org.w4tracking.representations.idm.ItemRepresentation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/companies")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -17,19 +17,19 @@ public interface CompanyResource {
 
     @POST
     @ApiOperation(value = "Create Company")
-    Response createCompany(CompanyRepresentation rep);
+    Response createCompany(ItemRepresentation<CompanyAttributes> rep);
 
     @PUT
     @ApiOperation(value = "Update Company")
-    void updateCompany(CompanyRepresentation rep);
+    void updateCompany(ItemRepresentation<CompanyAttributes> rep);
 
     @GET
     @ApiOperation(value = "Company list")
-    Representation<List<CompanyRepresentation>> getCompanies();
+    ItemRepresentation<CompanyAttributes> getCompanies();
 
     @GET
     @Path("/{companyId}")
     @ApiOperation(value = "Get Company")
-    CompanyRepresentation getCompany(@PathParam("companyId") String companyId);
+    CollectionRepresentation<CompanyAttributes> getCompany(@PathParam("companyId") String companyId);
 
 }
