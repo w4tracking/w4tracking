@@ -1,11 +1,10 @@
 package org.w4tracking;
 
-import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.w4tracking.representations.idm.CompanyAttributes;
+import org.w4tracking.representations.idm.CompanyAttributesRepresentation;
 import org.w4tracking.representations.idm.DataRepresentation;
 import org.w4tracking.representations.idm.ItemRepresentation;
 import org.w4tracking.representations.idm.LinksRepresentation;
@@ -18,7 +17,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,9 +33,9 @@ public class CompanyResourceTest {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(apiUrl);
 
-        ItemRepresentation<CompanyAttributes> company = new ItemRepresentation.Builder<CompanyAttributes>()
+        ItemRepresentation<CompanyAttributesRepresentation> company = new ItemRepresentation.Builder<CompanyAttributesRepresentation>()
                 .withData(
-                        new DataRepresentation.Builder<CompanyAttributes>()
+                        new DataRepresentation.Builder<CompanyAttributesRepresentation>()
                                 .withId(UUID.randomUUID().toString())
                                 .withType("company")
                                 .withLinks(
@@ -48,7 +46,7 @@ public class CompanyResourceTest {
                                                 .build()
                                 )
                                 .withAttributes(
-                                        new CompanyAttributes.Builder()
+                                        new CompanyAttributesRepresentation.Builder()
                                                 .withName("Wolsnut4")
                                                 .build()
                                 )

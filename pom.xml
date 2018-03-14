@@ -214,9 +214,9 @@
                 <version>0.8.0</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/**Test.class</exclude>
-                        <exclude>**/**Entity.class</exclude>
-                        <exclude>**/**Representation.class</exclude>
+                        <exclude>**/**Test.*</exclude>
+                        <exclude>**/**Entity.*</exclude>
+                        <exclude>**/**Representation.*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

@@ -1,14 +1,14 @@
 package org.w4tracking.representations.idm;
 
-public class CompanyAttributes implements AttributesRepresentation {
+public class CompanyAttributesRepresentation implements AttributesRepresentation {
 
     private String name;
 
-    public CompanyAttributes() {
+    public CompanyAttributesRepresentation() {
 
     }
 
-    private CompanyAttributes(Builder builder) {
+    private CompanyAttributesRepresentation(Builder builder) {
         this.name = builder.name;
     }
 
@@ -28,8 +28,8 @@ public class CompanyAttributes implements AttributesRepresentation {
             return this;
         }
 
-        public CompanyAttributes build() {
-            return new CompanyAttributes(this);
+        public CompanyAttributesRepresentation build() {
+            return new CompanyAttributesRepresentation(this);
         }
     }
 }

@@ -1,12 +1,8 @@
 package org.w4tracking;
 
-import io.swagger.annotations.Api;
-import org.w4tracking.models.transaction.W4TrackingTransaction;
-import org.w4tracking.models.transaction.W4Transactional;
 import org.w4tracking.representations.idm.*;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.*;
 
@@ -18,12 +14,12 @@ public class DefaultCompanyResource implements CompanyResource {
 //    private W4TrackingTransaction transaction;
 
     @Override
-    public Response createCompany(ItemRepresentation<CompanyAttributes> rep) {
-        DataRepresentation<CompanyAttributes> data = rep.getData();
+    public Response createCompany(ItemRepresentation<CompanyAttributesRepresentation> rep) {
+        DataRepresentation<CompanyAttributesRepresentation> data = rep.getData();
 
-        ItemRepresentation<CompanyAttributes> company = new ItemRepresentation.Builder<CompanyAttributes>()
+        ItemRepresentation<CompanyAttributesRepresentation> company = new ItemRepresentation.Builder<CompanyAttributesRepresentation>()
                 .withData(
-                        new DataRepresentation.Builder<CompanyAttributes>()
+                        new DataRepresentation.Builder<CompanyAttributesRepresentation>()
                                 .withId(UUID.randomUUID().toString())
                                 .withType("company")
                                 .withLinks(
@@ -34,7 +30,7 @@ public class DefaultCompanyResource implements CompanyResource {
                                                 .build()
                                 )
                                 .withAttributes(
-                                        new CompanyAttributes.Builder()
+                                        new CompanyAttributesRepresentation.Builder()
                                                 .withName("Wolsnut4")
                                                 .build()
                                 )
@@ -45,13 +41,13 @@ public class DefaultCompanyResource implements CompanyResource {
     }
 
     @Override
-    public void updateCompany(ItemRepresentation<CompanyAttributes> rep) {
+    public void updateCompany(ItemRepresentation<CompanyAttributesRepresentation> rep) {
 
     }
 
     @Override
-    public CollectionRepresentation<CompanyAttributes> getCompanies() {
-        DataRepresentation<CompanyAttributes> data = new DataRepresentation.Builder<CompanyAttributes>()
+    public CollectionRepresentation<CompanyAttributesRepresentation> getCompanies() {
+        DataRepresentation<CompanyAttributesRepresentation> data = new DataRepresentation.Builder<CompanyAttributesRepresentation>()
                 .withId(UUID.randomUUID().toString())
                 .withType("company")
                 .withLinks(
@@ -62,13 +58,13 @@ public class DefaultCompanyResource implements CompanyResource {
                                 .build()
                 )
                 .withAttributes(
-                        new CompanyAttributes.Builder()
+                        new CompanyAttributesRepresentation.Builder()
                                 .withName("Wolsnut4")
                                 .build()
                 )
                 .build();
 
-        return new CollectionRepresentation.Builder<CompanyAttributes>()
+        return new CollectionRepresentation.Builder<CompanyAttributesRepresentation>()
                 .withMeta(new HashMap<>())
                 .withLinks(new HashMap<>())
                 .withData(Collections.singletonList(data))
@@ -76,7 +72,7 @@ public class DefaultCompanyResource implements CompanyResource {
     }
 
     @Override
-    public ItemRepresentation<CompanyAttributes> getCompany(String companyId) {
+    public ItemRepresentation<CompanyAttributesRepresentation> getCompany(String companyId) {
         return null;
     }
 }
