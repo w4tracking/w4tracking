@@ -1,8 +1,6 @@
 package org.w4tracking.representations.idm;
 
-import java.io.Serializable;
-
-public class LinksRepresentation implements Serializable {
+public class LinksRepresentation {
 
     private String self;
     private String meta;
@@ -13,9 +11,9 @@ public class LinksRepresentation implements Serializable {
     }
 
     private LinksRepresentation(Builder builder) {
-        this.self = builder.self;
-        this.meta = builder.meta;
-        this.related = builder.related;
+        this.setSelf(builder.self);
+        this.setMeta(builder.meta);
+        this.setRelated(builder.related);
     }
 
     public String getSelf() {
@@ -28,6 +26,18 @@ public class LinksRepresentation implements Serializable {
 
     public String getRelated() {
         return related;
+    }
+
+    public void setSelf(String self) {
+        this.self = self;
+    }
+
+    public void setMeta(String meta) {
+        this.meta = meta;
+    }
+
+    public void setRelated(String related) {
+        this.related = related;
     }
 
     public static class Builder {

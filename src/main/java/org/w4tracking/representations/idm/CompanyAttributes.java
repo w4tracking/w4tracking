@@ -8,7 +8,7 @@ public class CompanyAttributes implements AttributesRepresentation {
 
     }
 
-    public CompanyAttributes(Builder builder) {
+    private CompanyAttributes(Builder builder) {
         this.name = builder.name;
     }
 

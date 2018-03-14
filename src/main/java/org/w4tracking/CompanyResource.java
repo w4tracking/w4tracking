@@ -26,11 +26,11 @@ public interface CompanyResource {
 
     @GET
     @ApiOperation(value = "Company list")
-    ItemRepresentation<CompanyAttributes> getCompanies();
+    CollectionRepresentation<CompanyAttributes> getCompanies();
 
     @GET
     @Path("/{companyId}")
     @ApiOperation(value = "Get Company")
-    CollectionRepresentation<CompanyAttributes> getCompany(@PathParam("companyId") String companyId);
+    ItemRepresentation<CompanyAttributes> getCompany(@PathParam("companyId") String companyId);
 
 }
