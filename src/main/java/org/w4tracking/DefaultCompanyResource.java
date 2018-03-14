@@ -1,5 +1,6 @@
 package org.w4tracking;
 
+import io.swagger.annotations.Api;
 import org.w4tracking.models.transaction.W4TrackingTransaction;
 import org.w4tracking.models.transaction.W4Transactional;
 import org.w4tracking.representations.idm.*;

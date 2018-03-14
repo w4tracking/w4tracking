@@ -28,3 +28,8 @@ addons:
     organization: w4tracking
     token:
       secure: $SONAR_TOKEN
+
+notifications:
+  email:
+    - carlosthe19916@gmail.com
+    - shanohl.sist@gmail.com
