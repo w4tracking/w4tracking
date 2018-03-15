@@ -1,8 +1,6 @@
 package org.w4tracking.models;
 
-public interface CompanyModel {
-
-    String id();
+public interface CompanyModel extends Model {
 
     String getName();
 

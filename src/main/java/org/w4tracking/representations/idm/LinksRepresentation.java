@@ -1,5 +1,7 @@
 package org.w4tracking.representations.idm;
 
+import java.net.URI;
+
 public class LinksRepresentation {
 
     private String self;
@@ -11,9 +13,9 @@ public class LinksRepresentation {
     }
 
     private LinksRepresentation(Builder builder) {
-        this.setSelf(builder.self);
-        this.setMeta(builder.meta);
-        this.setRelated(builder.related);
+        this.setSelf(builder.self != null ? builder.self.toString() : null);
+        this.setMeta(builder.meta != null ? builder.meta.toString() : null);
+        this.setRelated(builder.related != null ? builder.related.toString() : null);
     }
 
     public String getSelf() {
@@ -41,21 +43,21 @@ public class LinksRepresentation {
     }
 
     public static class Builder {
-        private String self;
-        private String meta;
-        private String related;
+        private URI self;
+        private URI meta;
+        private URI related;
 
-        public Builder withSelf(String self) {
+        public Builder withSelf(URI self) {
             this.self = self;
             return this;
         }
 
-        public Builder withMeta(String meta) {
+        public Builder withMeta(URI meta) {
             this.meta = meta;
             return this;
         }
 
-        public Builder withRelated(String related) {
+        public Builder withRelated(URI related) {
             this.related = related;
             return this;
         }
