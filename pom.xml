@@ -243,6 +243,11 @@
                 <groupId>org.wildfly.swarm</groupId>
                 <artifactId>wildfly-swarm-plugin</artifactId>
                 <version>${version.wildfly.swarm}</version>
+                <configuration>
+                    <properties>
+                        <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+                    </properties>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -339,7 +344,7 @@
                         <configuration>
                             <images>
                                 <image>
-                                    <name>${project.artifactId}</name>
+                                    <name>w4tracking/${project.artifactId}</name>
                                     <run>
                                         <ports>
                                             <port>8080:8080</port>
