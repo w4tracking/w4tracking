@@ -1,10 +1,12 @@
 package org.w4tracking.models;
 
+import java.util.Optional;
+
 public interface UserProvider {
 
     UserModel addUser(String username, String identityId, String identityProvider);
 
-    UserModel getUser(String id);
+    Optional<UserModel> getUser(String id);
 
-    UserModel getUserByIdentityId(String identityId);
+    Optional<UserModel> getUserByIdentityId(String identityId);
 }

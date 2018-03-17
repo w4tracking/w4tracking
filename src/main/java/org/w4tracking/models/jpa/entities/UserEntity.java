@@ -1,13 +1,17 @@
 package org.w4tracking.models.jpa.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "w4_user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "identity_id")
+})
+@NamedQueries(value = {
+        @NamedQuery(name = "GetUserByIdentityId", query = "select u from UserEntity u where u.identityId=:identityId")
+})
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,12 +25,18 @@ public class UserEntity implements Serializable {
     private String username;
 
     @NotNull
-    @Column(name = "identityId")
+    @Column(name = "identity_id")
     private String identityId;
 
     @NotNull
-    @Column(name = "identityProvider")
+    @Column(name = "identity_provider")
     private String identityProvider;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "full_name")
+    private String fullName;
 
     @Version
     @Column(name = "version")
@@ -62,6 +72,22 @@ public class UserEntity implements Serializable {
 
     public void setIdentityProvider(String identityProvider) {
         this.identityProvider = identityProvider;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public int getVersion() {
@@ -104,4 +130,5 @@ public class UserEntity implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
+
 }

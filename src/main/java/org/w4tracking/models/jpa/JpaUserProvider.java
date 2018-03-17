@@ -9,6 +9,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Stateless
@@ -29,12 +32,23 @@ public class JpaUserProvider implements UserProvider {
     }
 
     @Override
-    public UserModel getUser(String id) {
-        return null;
+    public Optional<UserModel> getUser(String id) {
+        UserEntity userEntity = em.find(UserEntity.class, id);
+        if (userEntity == null) return Optional.empty();
+        return Optional.of(new UserAdapter(em, userEntity));
     }
 
     @Override
-    public UserModel getUserByIdentityId(String identityId) {
-        return null;
+    public Optional<UserModel> getUserByIdentityId(String identityId) {
+        TypedQuery<UserEntity> query = em.createNamedQuery("GetUserByIdentityId", UserEntity.class);
+        query.setParameter("identityId", identityId);
+        List<UserEntity> resultList = query.getResultList();
+        if (resultList.size() == 1) {
+            return Optional.of(new UserAdapter(em, resultList.get(0)));
+        } else if (resultList.size() == 0) {
+            return Optional.empty();
+        } else {
+            throw new IllegalStateException("Found more than one user with equal identityId:" + identityId);
+        }
     }
 }

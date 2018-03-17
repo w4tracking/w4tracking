@@ -29,36 +29,36 @@ public class UserAdapter implements UserModel {
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getUsername();
     }
 
     @Override
     public String getIdentityId() {
-        return null;
+        return user.getIdentityId();
     }
 
     @Override
     public String getIdentityProvider() {
-        return null;
+        return user.getIdentityProvider();
     }
 
     @Override
     public String getEmail() {
-        return null;
+        return user.getEmail();
     }
 
     @Override
     public void setEmail(String email) {
-
+        user.getEmail();
     }
 
     @Override
     public String getFullName() {
-        return null;
+        return user.getFullName();
     }
 
     @Override
-    public void setFullName(String fullname) {
-
+    public void setFullName(String fullName) {
+        user.setFullName(fullName);
     }
 }
