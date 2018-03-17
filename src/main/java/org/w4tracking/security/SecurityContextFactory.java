@@ -14,13 +14,13 @@ public class SecurityContextFactory {
             @ConfigurationValue("w4tracking.security-context.type") Optional<String> sc,
             @SecurityContextType(name = SecurityContextType.IdentityProvider.DEFAULT) SecurityContext defaultSC,
             @SecurityContextType(name = SecurityContextType.IdentityProvider.KEYCLOAK) SecurityContext keycloakSC) {
-        String defaultSc = sc.orElse("default");
-        if ("default".equals(defaultSc)) {
+        String securityContext = sc.orElse("default");
+        if ("default".equals(securityContext)) {
             return defaultSC;
-        } else if ("keycloak".equals(defaultSc)) {
+        } else if ("keycloak".equals(securityContext)) {
             return keycloakSC;
         } else {
-            throw new RuntimeException("Unknown security context type: " + sc);
+            throw new UnknownSecurityContextTypeException(securityContext);
         }
     }
 
