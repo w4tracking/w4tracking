@@ -10,7 +10,7 @@ import java.util.Optional;
 public class SecurityContextFactory {
 
     @Produces
-    public static SecurityContext provideSecurityContext(
+    public SecurityContext provideSecurityContext(
             @ConfigurationValue("w4tracking.security-context.type") Optional<String> sc,
             @SecurityContextType(name = SecurityContextType.IdentityProvider.DEFAULT) SecurityContext defaultSC,
             @SecurityContextType(name = SecurityContextType.IdentityProvider.KEYCLOAK) SecurityContext keycloakSC) {

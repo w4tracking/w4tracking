@@ -25,6 +25,7 @@ public class DefaultSecurityContextFilter implements Filter {
 
     @Override
     public void destroy() {
+        // Nothing to do
     }
 
 }
