@@ -7,6 +7,10 @@ import org.w4tracking.representations.idm.LinksRepresentation;
 
 public class ResourceUtils {
 
+    private ResourceUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static <T extends AttributesRepresentation> DataRepresentation buildData(Model model, T attributes, LinksRepresentation links) {
         return new DataRepresentation.Builder<>()
                 .withId(model.getId())

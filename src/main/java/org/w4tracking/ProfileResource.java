@@ -24,6 +24,7 @@ import java.util.Optional;
 @Stateless
 @Path("/profile")
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Api(value = "Profile Resource", description = "Profile REST API", consumes = "application/json")
 public class ProfileResource {
 
@@ -39,7 +40,6 @@ public class ProfileResource {
     @GET
     @Path("/")
     @ApiOperation(value = "Get Profile")
-    @Produces(MediaType.APPLICATION_JSON)
     public ItemRepresentation<UserAttributesRepresentation> getProfile() {
         String username = securityContext.getUsername();
         String identityId = securityContext.getIdentityId();
