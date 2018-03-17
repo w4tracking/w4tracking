@@ -1,3 +1,17 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - mvn fabric8:build
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
+
 env:
   global:
   - MAVEN_OPTS="-Xms4096m -Xmx4096m"
