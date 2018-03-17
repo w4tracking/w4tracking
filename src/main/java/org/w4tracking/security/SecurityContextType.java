@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface SecurityContextType {
 
-    @Nonbinding IdentityProvider name();
+    IdentityProvider name();
 
     enum IdentityProvider {
         DEFAULT,

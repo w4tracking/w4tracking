@@ -1,6 +1,6 @@
 swarm:
   deployment:
-    w4tracking-1.0.0-SNAPSHOT.war:
+    w4tracking-${project.version}.war:
       web:
         login-config:
           auth-method: BASIC

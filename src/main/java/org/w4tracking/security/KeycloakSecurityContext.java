@@ -1,11 +1,12 @@
 package org.w4tracking.security;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Typed;
 import javax.servlet.http.HttpServletRequest;
 
 @Stateless
 @SecurityContextType(name = SecurityContextType.IdentityProvider.KEYCLOAK)
-public class KeycloakSecurityContext extends AbstractSecurityContext {
+public class KeycloakSecurityContext implements SecurityContext {
 
     @Override
     public String getRequestHeader(String headerName) {

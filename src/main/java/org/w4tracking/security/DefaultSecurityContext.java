@@ -1,11 +1,12 @@
 package org.w4tracking.security;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Typed;
 import javax.servlet.http.HttpServletRequest;
 
 @Stateless
 @SecurityContextType(name = SecurityContextType.IdentityProvider.DEFAULT)
-public class DefaultSecurityContext extends AbstractSecurityContext {
+public class DefaultSecurityContext implements SecurityContext {
 
     public static final ThreadLocal<HttpServletRequest> servletRequest = new ThreadLocal<>();
 
