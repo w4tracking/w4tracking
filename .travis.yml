@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - mvn fabric8:build
+  - mvn clean package -Pdocker
 
 deploy:
   provider: script
