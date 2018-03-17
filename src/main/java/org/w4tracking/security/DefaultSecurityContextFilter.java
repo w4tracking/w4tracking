@@ -10,6 +10,7 @@ public class DefaultSecurityContextFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
+        // Nothing to do
     }
 
     @Override

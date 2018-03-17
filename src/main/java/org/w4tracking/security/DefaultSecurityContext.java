@@ -16,11 +16,13 @@ public class DefaultSecurityContext implements SecurityContext {
 
     @Override
     public String getFullName() {
+        // No data to extract from
         return null;
     }
 
     @Override
     public String getEmail() {
+        // No data to extract from
         return null;
     }
 

@@ -41,10 +41,10 @@ public class JpaUserProvider implements UserProvider {
         TypedQuery<UserEntity> query = em.createNamedQuery("GetUserByIdentityId", UserEntity.class);
         query.setParameter("identityId", identityId);
         List<UserEntity> resultList = query.getResultList();
-        if (resultList.size() == 1) {
-            return Optional.of(new UserAdapter(em, resultList.get(0)));
-        } else if (resultList.size() == 0) {
+        if (resultList.isEmpty()) {
             return Optional.empty();
+        } else if (resultList.size() == 1) {
+            return Optional.of(new UserAdapter(em, resultList.get(0)));
         } else {
             throw new IllegalStateException("Found more than one user with equal identityId:" + identityId);
         }
