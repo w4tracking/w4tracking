@@ -1,5 +1,5 @@
 package org.w4tracking.security;
 
-public interface AbstractSecurityContext extends SecurityContext {
+public abstract class AbstractSecurityContext implements SecurityContext {
 
 }

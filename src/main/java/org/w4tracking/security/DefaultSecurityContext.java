@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Stateless
 @SecurityContextType(name = SecurityContextType.IdentityProvider.DEFAULT)
-public class DefaultSecurityContext implements SecurityContext {
+public class DefaultSecurityContext extends AbstractSecurityContext {
 
     public static final ThreadLocal<HttpServletRequest> servletRequest = new ThreadLocal<>();
 
