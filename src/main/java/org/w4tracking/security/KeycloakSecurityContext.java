@@ -1,11 +1,10 @@
 package org.w4tracking.security;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 
-@ApplicationScoped
-@SecurityProvider(name = SecurityProvider.Provider.KEYCLOAK)
+@Stateless
+@SecurityContextType(name = SecurityContextType.IdentityProvider.KEYCLOAK)
 public class KeycloakSecurityContext extends AbstractSecurityContext {
 
     @Override

@@ -49,4 +49,5 @@ public class DefaultCompanyResource implements CompanyResource {
     public ItemRepresentation<CompanyAttributesRepresentation> getCompany(String companyId) {
         return null;
     }
+
 }

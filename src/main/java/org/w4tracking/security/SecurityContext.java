@@ -3,10 +3,11 @@ package org.w4tracking.security;
 public interface SecurityContext {
 
     String getUsername();
-    String getFullName();
     String getEmail();
-    String getRequestHeader(String headerName);
+    String getFullName();
 
     String getIdentityId();
     String getIdentityProviderAlias();
+
+    String getRequestHeader(String headerName);
 }

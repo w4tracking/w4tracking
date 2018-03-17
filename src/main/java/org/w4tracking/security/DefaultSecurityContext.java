@@ -1,11 +1,10 @@
 package org.w4tracking.security;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 
-@ApplicationScoped
-@SecurityProvider(name = SecurityProvider.Provider.DEFAULT)
+@Stateless
+@SecurityContextType(name = SecurityContextType.IdentityProvider.DEFAULT)
 public class DefaultSecurityContext implements SecurityContext {
 
     public static final ThreadLocal<HttpServletRequest> servletRequest = new ThreadLocal<>();
@@ -26,11 +25,6 @@ public class DefaultSecurityContext implements SecurityContext {
     }
 
     @Override
-    public String getRequestHeader(String headerName) {
-        return servletRequest.get().getHeader(headerName);
-    }
-
-    @Override
     public String getIdentityId() {
         return servletRequest.get().getRemoteUser();
     }
@@ -38,6 +32,11 @@ public class DefaultSecurityContext implements SecurityContext {
     @Override
     public String getIdentityProviderAlias() {
         return "default";
+    }
+
+    @Override
+    public String getRequestHeader(String headerName) {
+        return servletRequest.get().getHeader(headerName);
     }
 
     protected static void setServletRequest(HttpServletRequest request) {

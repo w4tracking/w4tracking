@@ -20,6 +20,14 @@ public class UserEntity implements Serializable {
     @Column(name = "username")
     private String username;
 
+    @NotNull
+    @Column(name = "identityId")
+    private String identityId;
+
+    @NotNull
+    @Column(name = "identityProvider")
+    private String identityProvider;
+
     @Version
     @Column(name = "version")
     private int version;
@@ -38,6 +46,22 @@ public class UserEntity implements Serializable {
 
     public void setUsername(String name) {
         this.username = name;
+    }
+
+    public String getIdentityId() {
+        return identityId;
+    }
+
+    public void setIdentityId(String identityId) {
+        this.identityId = identityId;
+    }
+
+    public String getIdentityProvider() {
+        return identityProvider;
+    }
+
+    public void setIdentityProvider(String identityProvider) {
+        this.identityProvider = identityProvider;
     }
 
     public int getVersion() {
@@ -80,5 +104,4 @@ public class UserEntity implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-
 }

@@ -3,6 +3,7 @@ package org.w4tracking.models.jpa;
 import org.w4tracking.models.UserModel;
 import org.w4tracking.models.UserProvider;
 import org.w4tracking.models.jpa.entities.UserEntity;
+import org.w4tracking.models.utils.ModelUtils;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -19,8 +20,10 @@ public class JpaUserProvider implements UserProvider {
     @Override
     public UserModel addUser(String username, String identityId, String identityProvider) {
         UserEntity entity = new UserEntity();
-        entity.setId(UUID.randomUUID().toString());
+        entity.setId(ModelUtils.generateId());
         entity.setUsername(username);
+        entity.setIdentityId(identityId);
+        entity.setIdentityProvider(identityProvider);
         em.persist(entity);
         return new UserAdapter(em, entity);
     }

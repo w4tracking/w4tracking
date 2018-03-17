@@ -9,9 +9,9 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-            <property name="hibernate.show_sql" value="${env.CN_HIBERNATE_SHOW_SQL:true}"/>
-            <property name="hibernate.format_sql" value="${env.CN_HIBERNATE_FORMAT_SQL:true}"/>
-            <property name="hibernate.use_sql_comments" value="${env.CN_HIBERNATE_SHOW_SQL:true}" />
+            <property name="hibernate.show_sql" value="${env.W4_HIBERNATE_SHOW_SQL:true}"/>
+            <property name="hibernate.format_sql" value="${env.W4_HIBERNATE_FORMAT_SQL:true}"/>
+            <property name="hibernate.use_sql_comments" value="${env.W4_HIBERNATE_SHOW_SQL:true}"/>
 
             <property name="hibernate.cache.use_query_cache" value="false"/>
             <property name="hibernate.cache.use_second_level_cache" value="false"/>
@@ -21,6 +21,8 @@
             <property name="hibernate.order_updates" value="true"/>
 
             <property name="hibernate.generate_statistics" value="true"/>
+
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/database.sql"/>
         </properties>
     </persistence-unit>
 </persistence>

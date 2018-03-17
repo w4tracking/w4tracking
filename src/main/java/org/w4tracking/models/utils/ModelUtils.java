@@ -7,4 +7,5 @@ public class ModelUtils {
     public static String generateId() {
         return UUID.randomUUID().toString();
     }
+
 }

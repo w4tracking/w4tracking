@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 public interface ProfileResource {
 
     @GET
+    @Path("/")
     @ApiOperation(value = "Get Profile")
     ItemRepresentation<UserAttributesRepresentation> getProfile();
 

@@ -12,11 +12,11 @@ import java.lang.annotation.Documented;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE})
 @Documented
-public @interface SecurityProvider {
+public @interface SecurityContextType {
 
-    @Nonbinding Provider name();
+    @Nonbinding IdentityProvider name();
 
-    enum Provider {
+    enum IdentityProvider {
         DEFAULT,
         KEYCLOAK
     }
