@@ -7,7 +7,7 @@ import org.w4tracking.representations.idm.LinksRepresentation;
 
 public class ResourceUtils {
 
-    public static DataRepresentation<AttributesRepresentation> buildData(Model model, AttributesRepresentation attributes, LinksRepresentation links) {
+    public static <T extends AttributesRepresentation> DataRepresentation buildData(Model model, T attributes, LinksRepresentation links) {
         return new DataRepresentation.Builder<>()
                 .withId(model.getId())
                 .withType(model.getType().getAlias())

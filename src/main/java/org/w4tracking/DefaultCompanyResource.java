@@ -2,19 +2,17 @@ package org.w4tracking;
 
 import org.w4tracking.models.CompanyModel;
 import org.w4tracking.models.CompanyProvider;
-import org.w4tracking.models.transaction.W4Transactional;
 import org.w4tracking.models.utils.ModelToRepresentation;
 import org.w4tracking.representations.idm.*;
 
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 
-@RequestScoped
-@W4Transactional
+@Stateless
 public class DefaultCompanyResource implements CompanyResource {
 
     @Inject
@@ -44,28 +42,6 @@ public class DefaultCompanyResource implements CompanyResource {
 
     @Override
     public CollectionRepresentation<CompanyAttributesRepresentation> getCompanies() {
-//        DataRepresentation<CompanyAttributesRepresentation> data = new DataRepresentation.Builder<CompanyAttributesRepresentation>()
-//                .withId(UUID.randomUUID().toString())
-//                .withType("company")
-//                .withLinks(
-//                        new LinksRepresentation.Builder()
-//                                .withMeta("withMeta")
-//                                .withRelated("withRelated")
-//                                .withSelf("withSelf")
-//                                .build()
-//                )
-//                .withAttributes(
-//                        new CompanyAttributesRepresentation.Builder()
-//                                .withName("Wolsnut4")
-//                                .build()
-//                )
-//                .build();
-//
-//        return new CollectionRepresentation.Builder<CompanyAttributesRepresentation>()
-//                .withMeta(new HashMap<>())
-//                .withLinks(new HashMap<>())
-//                .withData(Collections.singletonList(data))
-//                .build();
         return null;
     }
 

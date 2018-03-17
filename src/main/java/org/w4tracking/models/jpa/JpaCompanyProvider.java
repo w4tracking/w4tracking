@@ -3,18 +3,17 @@ package org.w4tracking.models.jpa;
 import org.w4tracking.models.CompanyModel;
 import org.w4tracking.models.CompanyProvider;
 import org.w4tracking.models.jpa.entities.CompanyEntity;
-import org.w4tracking.models.transaction.W4Transactional;
 import org.w4tracking.models.utils.ModelUtils;
 
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-@RequestScoped
-@W4Transactional
+@Stateless
 public class JpaCompanyProvider implements CompanyProvider {
 
-    @Inject
+    @PersistenceContext
     private EntityManager em;
 
     @Override
