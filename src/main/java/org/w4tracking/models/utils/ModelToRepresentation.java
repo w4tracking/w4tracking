@@ -1,10 +1,9 @@
 package org.w4tracking.models.utils;
 
 import org.w4tracking.models.CompanyModel;
-import org.w4tracking.models.Model;
-import org.w4tracking.models.ModelType;
 import org.w4tracking.models.UserModel;
-import org.w4tracking.representations.idm.*;
+import org.w4tracking.representations.idm.CompanyAttributesRepresentation;
+import org.w4tracking.representations.idm.UserAttributesRepresentation;
 
 public class ModelToRepresentation {
 

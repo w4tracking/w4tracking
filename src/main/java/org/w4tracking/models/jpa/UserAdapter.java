@@ -2,7 +2,6 @@ package org.w4tracking.models.jpa;
 
 import org.w4tracking.models.ModelType;
 import org.w4tracking.models.UserModel;
-import org.w4tracking.models.jpa.entities.CompanyEntity;
 import org.w4tracking.models.jpa.entities.UserEntity;
 
 import javax.persistence.EntityManager;

@@ -6,7 +6,6 @@ import org.w4tracking.models.jpa.entities.CompanyEntity;
 import org.w4tracking.models.utils.ModelUtils;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
