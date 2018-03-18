@@ -9,6 +9,8 @@ addons:
     organization: w4tracking
     token:
       secure: $SONAR_TOKEN
+    github_token:
+      secure: $GITHUB_TOKEN
 
 notifications:
   email:
@@ -29,7 +31,6 @@ script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 
 after_success:
-  - mvn clean cobertura:cobertura
   - mvn clean package -Pdocker
 
 deploy:
