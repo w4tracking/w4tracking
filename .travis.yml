@@ -23,14 +23,7 @@ env:
   - MAVEN_OPTS="-Xms4096m -Xmx4096m"
   - CC_TEST_REPORTER_ID=4d309aad98e8a5ffa0ee679aece145b4ef73075ef709444a7f8a7973b1eab8ad
 
-# Install section
-
-after_install:
-  - mvn clean package -Pdocker
-
-
 # Script section
-
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -43,6 +36,7 @@ script:
 
 after_success:
   - mvn clean cobertura:cobertura
+  - mvn clean package -Pdocker
 
 deploy:
   provider: script
