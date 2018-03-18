@@ -254,6 +254,14 @@
                             <goal>package</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>start</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <phase>none</phase>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -333,7 +341,6 @@
             <activation/>
         </profile>
 
-
         <profile>
             <id>docker</id>
             <build>
@@ -371,6 +378,10 @@
                                         <entryPoint>
                                             <shell>java -jar /opt/${project.artifactId}-${project.version}-swarm.jar</shell>
                                         </entryPoint>
+                                        <tags>
+                                            <tag>latest</tag>
+                                            <tag>${project.version}</tag>
+                                        </tags>
                                     </build>
                                 </image>
                             </images>
