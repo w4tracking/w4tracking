@@ -11,10 +11,10 @@ public class ResourceUtils {
         throw new IllegalStateException("Utility class");
     }
 
-    public static <T extends AttributesRepresentation> DataRepresentation buildData(Model model, T attributes, LinksRepresentation links) {
-        return new DataRepresentation.Builder<>()
+    public static <T extends AttributesRepresentation> DataRepresentation<T> buildData(Model model, T attributes, LinksRepresentation links) {
+        return new DataRepresentation.Builder<T>()
                 .withId(model.getId())
-                .withType(model.getType().getAlias())
+                .withType(model.getType().toString())
                 .withAttributes(attributes)
                 .withLinks(links)
                 .build();

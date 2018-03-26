@@ -1,6 +1,5 @@
 package org.w4tracking.security;
 
-import javax.enterprise.util.Nonbinding;
 import javax.inject.Qualifier;
 import java.lang.annotation.*;
 
@@ -13,7 +12,6 @@ public @interface SecurityContextType {
     IdentityProvider name();
 
     enum IdentityProvider {
-        DEFAULT,
         KEYCLOAK
     }
 }

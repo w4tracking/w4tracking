@@ -1,26 +1,36 @@
 package org.w4tracking.security;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Typed;
+import org.keycloak.KeycloakPrincipal;
+import org.keycloak.representations.AccessToken;
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.servlet.http.HttpServletRequest;
 
-@Stateless
+@ApplicationScoped
 @SecurityContextType(name = SecurityContextType.IdentityProvider.KEYCLOAK)
-public class KeycloakSecurityContext implements SecurityContext {
+public class KeycloakSecurityContext extends AbstractSecurityContext implements ISecurityContext {
 
     @Override
     public String getRequestHeader(String headerName) {
-        return DefaultSecurityContext.servletRequest.get().getHeader(headerName);
+        return servletRequest.get().getHeader(headerName);
+    }
+
+    @Override
+    public Object getAttribute(String attributeName) {
+        return servletRequest.get().getAttribute(attributeName);
     }
 
     @Override
     public String getUsername() {
-        return DefaultSecurityContext.servletRequest.get().getRemoteUser();
+        HttpServletRequest request = servletRequest.get();
+        KeycloakPrincipal<org.keycloak.KeycloakSecurityContext> principal = (KeycloakPrincipal<org.keycloak.KeycloakSecurityContext>) request.getUserPrincipal();
+        AccessToken accessToken = principal.getKeycloakSecurityContext().getToken();
+        return accessToken.getPreferredUsername();
     }
 
     @Override
     public String getFullName() {
-        HttpServletRequest request = DefaultSecurityContext.servletRequest.get();
+        HttpServletRequest request = servletRequest.get();
         org.keycloak.KeycloakSecurityContext session = (org.keycloak.KeycloakSecurityContext) request.getAttribute(org.keycloak.KeycloakSecurityContext.class.getName());
         if (session != null) {
             return session.getToken().getName();
@@ -31,7 +41,7 @@ public class KeycloakSecurityContext implements SecurityContext {
 
     @Override
     public String getEmail() {
-        HttpServletRequest request = DefaultSecurityContext.servletRequest.get();
+        HttpServletRequest request = servletRequest.get();
         org.keycloak.KeycloakSecurityContext session = (org.keycloak.KeycloakSecurityContext) request.getAttribute(org.keycloak.KeycloakSecurityContext.class.getName());
         if (session != null) {
             return session.getToken().getEmail();
@@ -42,7 +52,9 @@ public class KeycloakSecurityContext implements SecurityContext {
 
     @Override
     public String getIdentityId() {
-        return null;
+        HttpServletRequest request = servletRequest.get();
+        KeycloakPrincipal<org.keycloak.KeycloakSecurityContext> principal = (KeycloakPrincipal<org.keycloak.KeycloakSecurityContext>) request.getUserPrincipal();
+        return principal.getName();
     }
 
     @Override

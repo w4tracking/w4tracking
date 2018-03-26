@@ -1,6 +1,6 @@
 package org.w4tracking.security;
 
-public interface SecurityContext {
+public interface ISecurityContext {
 
     String getUsername();
 
@@ -13,4 +13,6 @@ public interface SecurityContext {
     String getIdentityProviderAlias();
 
     String getRequestHeader(String headerName);
+
+    Object getAttribute(String attributeName);
 }

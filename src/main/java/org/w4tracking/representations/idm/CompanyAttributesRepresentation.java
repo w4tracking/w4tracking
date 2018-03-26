@@ -8,6 +8,39 @@ public class CompanyAttributesRepresentation implements AttributesRepresentation
 
     }
 
+    public static class SpaceRelationships {
+        private SpaceOwnedBy ownedBy;
+
+        public SpaceOwnedBy getOwnedBy() {
+            return ownedBy;
+        }
+
+        public void setOwnedBy(SpaceOwnedBy ownedBy) {
+            this.ownedBy = ownedBy;
+        }
+    }
+
+    public static class SpaceOwnedBy {
+        private UserRepresentation.UserData data;
+        private GenericLinksRepresentation links;
+
+        public UserRepresentation.UserData getData() {
+            return data;
+        }
+
+        public void setData(UserRepresentation.UserData data) {
+            this.data = data;
+        }
+
+        public GenericLinksRepresentation getLinks() {
+            return links;
+        }
+
+        public void setLinks(GenericLinksRepresentation links) {
+            this.links = links;
+        }
+    }
+
     private CompanyAttributesRepresentation(Builder builder) {
         this.name = builder.name;
     }

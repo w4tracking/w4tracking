@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @WebFilter("/*")
-public class DefaultSecurityContextFilter implements Filter {
+public class SecurityContextFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
@@ -15,11 +15,11 @@ public class DefaultSecurityContextFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        DefaultSecurityContext.setServletRequest((HttpServletRequest) request);
+        AbstractSecurityContext.setServletRequest((HttpServletRequest) request);
         try {
             chain.doFilter(request, response);
         } finally {
-            DefaultSecurityContext.clearServletRequest();
+            AbstractSecurityContext.clearServletRequest();
         }
     }
 
