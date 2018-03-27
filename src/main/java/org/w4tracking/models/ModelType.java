@@ -1,7 +1,7 @@
 package org.w4tracking.models;
 
 public enum ModelType {
-
+    USER("user"),
     COMPANY("company");
 
     private String alias;

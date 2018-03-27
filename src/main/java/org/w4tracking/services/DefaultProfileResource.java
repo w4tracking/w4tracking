@@ -1,14 +1,12 @@
 package org.w4tracking.services;
 
 import org.w4tracking.ProfileResource;
-import org.w4tracking.ResourceUtils;
+import org.w4tracking.models.ModelType;
 import org.w4tracking.models.UserModel;
 import org.w4tracking.models.UserProvider;
 import org.w4tracking.models.utils.ModelToRepresentation;
-import org.w4tracking.representations.idm.DataRepresentation;
-import org.w4tracking.representations.idm.ItemRepresentation;
 import org.w4tracking.representations.idm.LinksRepresentation;
-import org.w4tracking.representations.idm.UserAttributesRepresentation;
+import org.w4tracking.representations.idm.UserRepresentation;
 import org.w4tracking.security.ISecurityContext;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -33,7 +31,7 @@ public class DefaultProfileResource implements ProfileResource {
     private ISecurityContext securityContext;
 
     @Override
-    public ItemRepresentation<UserAttributesRepresentation> getProfile() {
+    public UserRepresentation getProfile() {
         Optional<UserModel> userModel = userProvider.getUserByIdentityId(securityContext.getIdentityId());
         return toItemRepresentation(userModel.orElseGet(this::firstLogin));
     }
@@ -45,15 +43,24 @@ public class DefaultProfileResource implements ProfileResource {
         return user;
     }
 
-    private ItemRepresentation<UserAttributesRepresentation> toItemRepresentation(UserModel user) {
+    private UserRepresentation toItemRepresentation(UserModel user) {
         URI self = uriInfo.getBaseUriBuilder()
                 .path(DefaultProfileResource.class)
                 .path(DefaultProfileResource.class, "getProfile")
                 .build();
         LinksRepresentation links = new LinksRepresentation.Builder().withSelf(self).build();
-        UserAttributesRepresentation userAttributes = ModelToRepresentation.toRepresentation(user, true);
-        DataRepresentation<UserAttributesRepresentation> data = ResourceUtils.buildData(user, userAttributes, links);
-        return new ItemRepresentation.Builder<UserAttributesRepresentation>().withData(data).build();
+
+        UserRepresentation.UserAttributesRepresentation userAttributes = ModelToRepresentation.toRepresentation(user, true);
+
+        UserRepresentation.UserData data = new UserRepresentation.UserData();
+        data.setId(user.getId());
+        data.setType(ModelType.COMPANY.toString());
+        data.setLinks(links);
+        data.setAttributes(userAttributes);
+
+        UserRepresentation userRepresentation = new UserRepresentation();
+        userRepresentation.setData(data);
+        return userRepresentation;
     }
 
 }

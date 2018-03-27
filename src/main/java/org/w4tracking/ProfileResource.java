@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.w4tracking.representations.idm.ItemRepresentation;
 import org.w4tracking.representations.idm.UserAttributesRepresentation;
+import org.w4tracking.representations.idm.UserRepresentation;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,6 +21,6 @@ public interface ProfileResource {
     @GET
     @Path("/")
     @ApiOperation(value = "Get Profile")
-    ItemRepresentation<UserAttributesRepresentation> getProfile();
+    UserRepresentation getProfile();
 
 }
