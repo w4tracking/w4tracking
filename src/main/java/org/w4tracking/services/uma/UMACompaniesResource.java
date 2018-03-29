@@ -47,7 +47,6 @@ public abstract class UMACompaniesResource implements CompaniesResource {
         CompanyRepresentation company = delegate.createCompany(rep);
         CompanyRepresentation.CompanyData data = company.getData();
         CompanyRepresentation.CompanyOwnedBy ownedBy = data.getRelationships().getOwnedBy();
-        CompanyRepresentation.CompanyAttributesRepresentation attributes = data.getAttributes();
 
         try {
             HashSet<ScopeRepresentation> scopes = new HashSet<>();
@@ -56,12 +55,12 @@ public abstract class UMACompaniesResource implements CompaniesResource {
             scopes.add(new ScopeRepresentation(SCOPE_COMPANY_EDIT));
             scopes.add(new ScopeRepresentation(SCOPE_COMPANY_DELETE));
 
-            ResourceRepresentation albumResource = new ResourceRepresentation("Company["+data.getId()+"]", scopes, "/companies/" + data.getId(), "http://w4tracking.com/companies");
+            ResourceRepresentation albumResource = new ResourceRepresentation("Company[" + data.getId() + "]", scopes, "/companies/" + data.getId(), "http://w4tracking.com/companies");
             albumResource.setOwner(ownedBy.getData().getId());
 
             getAuthzClient().protection().resource().create(albumResource);
         } catch (Exception e) {
-            throw new RuntimeException("Could not register protected resource.", e);
+            throw new UMAResourceException("Could not register protected resource.", e);
         }
 
         return company;

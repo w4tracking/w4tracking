@@ -70,7 +70,7 @@ public class DefaultCompanyResource implements CompaniesResource {
                     .map(model -> toData(model, ModelToRepresentation.toRepresentation(model, false)))
                     .map(Collections::singletonList)
                     .map(CompaniesRepresentation::new)
-                    .orElseGet(() -> new CompaniesRepresentation(Collections.EMPTY_LIST));
+                    .orElseGet(() -> new CompaniesRepresentation(Collections.emptyList()));
         } else if (filterText != null) {
             List<CompanyRepresentation.CompanyData> data = companyProvider.getCompanies(filterText, offset, limit)
                     .stream()
@@ -84,7 +84,6 @@ public class DefaultCompanyResource implements CompaniesResource {
 
     @Override
     public CompaniesRepresentation searchCompanies(CompanySearchQueryRepresentation query) {
-        CompanySearchQueryRepresentation.CompanySearchQueryData data = query.getData();
         throw new ForbiddenException();
     }
 
@@ -97,7 +96,7 @@ public class DefaultCompanyResource implements CompaniesResource {
 
     @Override
     public void updateCompany(String companyId, CompaniesRepresentation rep) {
-        CompanyModel companyModel = companyProvider.getCompany(companyId).orElseThrow(NotFoundException::new);
+        companyProvider.getCompany(companyId).orElseThrow(NotFoundException::new);
     }
 
     @Override

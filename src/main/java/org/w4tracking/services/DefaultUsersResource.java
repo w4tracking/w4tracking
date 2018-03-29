@@ -72,7 +72,7 @@ public class DefaultUsersResource implements UsersResource {
                     .map(model -> toData(model, ModelToRepresentation.toRepresentation(model, false)))
                     .map(Collections::singletonList)
                     .map(UsersRepresentation::new)
-                    .orElseGet(() -> new UsersRepresentation(Collections.EMPTY_LIST));
+                    .orElseGet(() -> new UsersRepresentation(Collections.emptyList()));
         } else if (filterText != null) {
             List<UserRepresentation.UserData> data = userProvider.getUsers(filterText, offset, limit)
                     .stream()
@@ -93,7 +93,7 @@ public class DefaultUsersResource implements UsersResource {
 
     @Override
     public void updateUser(String userId, UserRepresentation rep) {
-        UserModel userModel = userProvider.getUser(userId).orElseThrow(NotFoundException::new);
+        userProvider.getUser(userId).orElseThrow(NotFoundException::new);
     }
 
     @Override

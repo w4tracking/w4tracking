@@ -7,6 +7,10 @@ import javax.ws.rs.core.Response;
 
 public class ErrorResponse {
 
+    private ErrorResponse() {
+        // Just static instances
+    }
+
     public static Response exists(String message) {
         return ErrorResponse.error(message, Response.Status.CONFLICT);
     }
