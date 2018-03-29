@@ -3,6 +3,14 @@ package org.w4tracking.representations.idm;
 public class UserRepresentation {
     private UserData data;
 
+    public UserRepresentation() {
+
+    }
+
+    public UserRepresentation(UserData data) {
+        this.data = data;
+    }
+
     public UserData getData() {
         return data;
     }

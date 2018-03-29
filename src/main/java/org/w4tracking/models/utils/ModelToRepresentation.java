@@ -2,7 +2,7 @@ package org.w4tracking.models.utils;
 
 import org.w4tracking.models.CompanyModel;
 import org.w4tracking.models.UserModel;
-import org.w4tracking.representations.idm.CompanyAttributesRepresentation;
+import org.w4tracking.representations.idm.CompanyRepresentation;
 import org.w4tracking.representations.idm.UserRepresentation;
 
 public class ModelToRepresentation {
@@ -22,10 +22,14 @@ public class ModelToRepresentation {
         return rep;
     }
 
-    public static CompanyAttributesRepresentation toRepresentation(CompanyModel model, boolean internal) {
-        CompanyAttributesRepresentation rep = new CompanyAttributesRepresentation();
+    public static CompanyRepresentation.CompanyAttributesRepresentation toRepresentation(CompanyModel model, boolean fullInfo) {
+        CompanyRepresentation.CompanyAttributesRepresentation rep = new CompanyRepresentation.CompanyAttributesRepresentation();
 
         rep.setName(model.getName());
+
+        if (fullInfo) {
+
+        }
 
         return rep;
     }

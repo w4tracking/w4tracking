@@ -3,11 +3,9 @@ package org.w4tracking;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.w4tracking.representations.idm.CompaniesRepresentation;
-import org.w4tracking.representations.idm.CompanyAttributesRepresentation;
 import org.w4tracking.representations.idm.CompanyRepresentation;
-import org.w4tracking.representations.idm.ItemRepresentation;
+import org.w4tracking.representations.idm.CompanySearchQueryRepresentation;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -27,23 +25,40 @@ public interface CompaniesResource {
     @Path("/")
     @ApiOperation(value = "Get Companies")
     CompaniesRepresentation getCompanies(
-            @QueryParam("userId") String userId,
-            @QueryParam("userRole") @DefaultValue("owner") String userRole
+            @QueryParam("companyId") String companyId,
+            @QueryParam("filterText") String filterText,
+            @QueryParam("offset") @DefaultValue("0") Integer offset,
+            @QueryParam("limit") @DefaultValue("10") Integer limit
+    );
+
+    @POST
+    @Path("/search")
+    @ApiOperation(value = "Get Companies")
+    CompaniesRepresentation searchCompanies(
+            CompanySearchQueryRepresentation query
     );
 
     @GET
     @Path("/{companyId}")
     @ApiOperation(value = "Get Company")
-    CompaniesRepresentation getCompany(String companyId);
+    CompanyRepresentation getCompany(
+            String companyId
+    );
 
     @PUT
     @Path("/{companyId}")
     @ApiOperation(value = "Update Company")
-    void updateCompany(CompaniesRepresentation rep);
+    void updateCompany(
+            @PathParam("companyId") String companyId,
+            CompaniesRepresentation rep
+    );
 
     @DELETE
     @Path("/{companyId}")
     @ApiOperation(value = "Update Company")
-    void deleteCompany(CompaniesRepresentation rep);
+    void deleteCompany(
+            @PathParam("companyId") String companyId,
+            CompaniesRepresentation rep
+    );
 
 }

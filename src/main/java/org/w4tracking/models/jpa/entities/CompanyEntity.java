@@ -1,13 +1,14 @@
 package org.w4tracking.models.jpa.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "w4_company")
+@NamedQueries(value = {
+        @NamedQuery(name = "getCompaniesByFilterText", query = "select c from CompanyEntity c where lower(c.name) like :filterText")
+})
 public class CompanyEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

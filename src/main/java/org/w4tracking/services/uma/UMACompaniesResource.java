@@ -5,22 +5,19 @@ import org.keycloak.authorization.client.AuthzClient;
 import org.keycloak.authorization.client.ClientAuthorizationContext;
 import org.keycloak.authorization.client.representation.ResourceRepresentation;
 import org.keycloak.authorization.client.representation.ScopeRepresentation;
-import org.w4tracking.CompanyResource;
-import org.w4tracking.representations.idm.CollectionRepresentation;
-import org.w4tracking.representations.idm.CompanyAttributesRepresentation;
-import org.w4tracking.representations.idm.DataRepresentation;
-import org.w4tracking.representations.idm.ItemRepresentation;
+import org.w4tracking.CompaniesResource;
+import org.w4tracking.representations.idm.CompanyRepresentation;
 import org.w4tracking.security.ISecurityContext;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.util.HashSet;
 
 @Decorator
-@ApplicationScoped
-public class UMACompanyResource implements CompanyResource {
+@Dependent
+public abstract class UMACompaniesResource implements CompaniesResource {
 
     public static final String SCOPE_COMPANY_VIEW = "urn:w4tracking.com:scopes:company:view";
     public static final String SCOPE_COMPANY_EDIT = "urn:w4tracking.com:scopes:company:edit";
@@ -31,7 +28,7 @@ public class UMACompanyResource implements CompanyResource {
 
     @Inject
     @Delegate
-    private CompanyResource delegate;
+    private CompaniesResource delegate;
 
     private AuthzClient getAuthzClient() {
         return getAuthorizationContext().getClient();
@@ -46,10 +43,11 @@ public class UMACompanyResource implements CompanyResource {
     }
 
     @Override
-    public ItemRepresentation<CompanyAttributesRepresentation> createCompany(ItemRepresentation<CompanyAttributesRepresentation> rep) {
-        ItemRepresentation<CompanyAttributesRepresentation> companyRepresentation = delegate.createCompany(rep);
-        DataRepresentation<CompanyAttributesRepresentation> data = companyRepresentation.getData();
-        CompanyAttributesRepresentation attributes = data.getAttributes();
+    public CompanyRepresentation createCompany(CompanyRepresentation rep) {
+        CompanyRepresentation company = delegate.createCompany(rep);
+        CompanyRepresentation.CompanyData data = company.getData();
+        CompanyRepresentation.CompanyOwnedBy ownedBy = data.getRelationships().getOwnedBy();
+        CompanyRepresentation.CompanyAttributesRepresentation attributes = data.getAttributes();
 
         try {
             HashSet<ScopeRepresentation> scopes = new HashSet<>();
@@ -58,29 +56,15 @@ public class UMACompanyResource implements CompanyResource {
             scopes.add(new ScopeRepresentation(SCOPE_COMPANY_EDIT));
             scopes.add(new ScopeRepresentation(SCOPE_COMPANY_DELETE));
 
-            ResourceRepresentation albumResource = new ResourceRepresentation(data.getId(), scopes, "/companies/" + data.getId(), "http://w4tracking.com/company");
-            albumResource.setOwner(album.getUserId());
+            ResourceRepresentation albumResource = new ResourceRepresentation("Company["+data.getId()+"]", scopes, "/companies/" + data.getId(), "http://w4tracking.com/companies");
+            albumResource.setOwner(ownedBy.getData().getId());
 
             getAuthzClient().protection().resource().create(albumResource);
         } catch (Exception e) {
             throw new RuntimeException("Could not register protected resource.", e);
         }
 
-        return companyRepresentation;
+        return company;
     }
 
-    @Override
-    public void updateCompany(ItemRepresentation<CompanyAttributesRepresentation> rep) {
-        delegate.updateCompany(rep);
-    }
-
-    @Override
-    public CollectionRepresentation<CompanyAttributesRepresentation> getCompanies() {
-        return delegate.getCompanies();
-    }
-
-    @Override
-    public ItemRepresentation<CompanyAttributesRepresentation> getCompany(String companyId) {
-        return delegate.getCompany(companyId);
-    }
 }

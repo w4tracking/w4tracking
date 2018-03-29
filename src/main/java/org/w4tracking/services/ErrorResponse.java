@@ -1,4 +1,4 @@
-package org.w4tracking;
+package org.w4tracking.services;
 
 import org.w4tracking.representations.idm.ErrorRepresentation;
 

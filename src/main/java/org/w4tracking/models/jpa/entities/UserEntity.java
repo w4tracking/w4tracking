@@ -10,7 +10,9 @@ import java.io.Serializable;
         @UniqueConstraint(columnNames = "identity_id")
 })
 @NamedQueries(value = {
-        @NamedQuery(name = "GetUserByIdentityId", query = "select u from UserEntity u where u.identityId=:identityId")
+        @NamedQuery(name = "GetUserByIdentityId", query = "select u from UserEntity u where u.identityId=:identityId"),
+        @NamedQuery(name = "GetUserByUsername", query = "select u from UserEntity u where u.username=:username"),
+        @NamedQuery(name = "getUsersByFilterText", query = "select u from UserEntity u where lower(u.username) like :filterText or lower(u.fullName) like :filterText or lower(u.email) like :filterText")
 })
 public class UserEntity implements Serializable {
 

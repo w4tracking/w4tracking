@@ -1,4 +1,4 @@
-package org.w4tracking;
+package org.w4tracking.services.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

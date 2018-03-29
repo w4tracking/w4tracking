@@ -2,8 +2,6 @@ package org.w4tracking;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.w4tracking.representations.idm.ItemRepresentation;
-import org.w4tracking.representations.idm.UserAttributesRepresentation;
 import org.w4tracking.representations.idm.UserRepresentation;
 
 import javax.ws.rs.Consumes;

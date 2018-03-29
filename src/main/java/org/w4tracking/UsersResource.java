@@ -14,12 +14,19 @@ import javax.ws.rs.core.MediaType;
 @Api(value = "User Resource", description = "User REST API", consumes = "application/json")
 public interface UsersResource {
 
+    @POST
+    @Path("/")
+    void createUser();
+
     @GET
     @Path("/")
     @ApiOperation(value = "List Users")
     UsersRepresentation getUsers(
             @QueryParam("userId") String userId,
-            @QueryParam("username") String username
+            @QueryParam("username") String username,
+            @QueryParam("filterText") String filterText,
+            @QueryParam("offset") @DefaultValue("0") Integer offset,
+            @QueryParam("limit") @DefaultValue("10") Integer limit
     );
 
     @GET
