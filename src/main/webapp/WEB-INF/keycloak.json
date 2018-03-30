@@ -1,0 +1,105 @@
+{
+  "realm": "${sso.realm:w4tracking}",
+  "bearer-only": true,
+  "auth-server-url": "${sso.auth.server.url:http://localhost:8081/auth}",
+  "ssl-required": "external",
+  "resource": "${sso.clientId:w4tracking-restful-api}",
+  "credentials": {
+    "secret": "${sso.clientSecret:secret}"
+  },
+  "enable-cors": true,
+  "cors-exposed-headers": "WWW-Authenticate",
+  "policy-enforcer": {
+    "user-managed-access": {},
+    "paths": [
+      {
+        "path": "/profile"
+      },
+      {
+        "path": "/serverinfo"
+      },
+      {
+        "path": "/users/*",
+        "methods": [
+          {
+            "method": "POST",
+            "scopes": [
+              "urn:w4tracking.com:scopes:user:create"
+            ]
+          },
+          {
+            "method": "GET",
+            "scopes": [
+              "urn:w4tracking.com:scopes:user:view"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "User Resource",
+        "path": "/users/{id}",
+        "methods": [
+          {
+            "method": "GET",
+            "scopes": [
+              "urn:w4tracking.com:scopes:user:view"
+            ]
+          },
+          {
+            "method": "PUT",
+            "scopes": [
+              "urn:w4tracking.com:scopes:user:edit"
+            ]
+          },
+          {
+            "method": "DELETE",
+            "scopes": [
+              "urn:w4tracking.com:scopes:user:delete"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/companies/*",
+        "methods": [
+          {
+            "method": "GET",
+            "scopes": [
+              "urn:w4tracking.com:scopes:company:view"
+            ]
+          },
+          {
+            "method": "POST",
+            "scopes": [
+              "urn:w4tracking.com:scopes:company:create"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Company Resource",
+        "path": "/companies/{id}",
+        "methods": [
+          {
+            "method": "GET",
+            "scopes": [
+              "urn:w4tracking.com:scopes:company:view"
+            ]
+          },
+          {
+            "method": "DELETE",
+            "scopes": [
+              "urn:w4tracking.com:scopes:company:delete"
+            ]
+          },
+          {
+            "method": "PUT",
+            "scopes": [
+              "urn:w4tracking.com:scopes:company:edit"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

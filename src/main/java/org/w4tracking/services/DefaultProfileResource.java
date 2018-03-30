@@ -37,7 +37,7 @@ public class DefaultProfileResource implements ProfileResource {
     }
 
     private UserModel firstLogin() {
-        UserModel user = userProvider.addUser(securityContext.getUsername(), securityContext.getIdentityId(), securityContext.getIdentityProviderAlias());
+        UserModel user = userProvider.addUser(securityContext.getIdentityId(), securityContext.getUsername(), securityContext.getIdentityProviderAlias());
         user.setEmail(securityContext.getEmail());
         user.setFullName(securityContext.getFullName());
         return user;
@@ -45,8 +45,8 @@ public class DefaultProfileResource implements ProfileResource {
 
     private UserRepresentation toItemRepresentation(UserModel user) {
         URI self = uriInfo.getBaseUriBuilder()
-                .path(DefaultProfileResource.class)
-                .path(DefaultProfileResource.class, "getProfile")
+                .path(ProfileResource.class)
+                .path(ProfileResource.class, "getProfile")
                 .build();
         LinksRepresentation links = new LinksRepresentation.Builder().withSelf(self).build();
 
