@@ -1,0 +1,230 @@
+{
+  "allowRemoteResourceManagement": true,
+  "policyEnforcementMode": "ENFORCING",
+  "resources": [
+    {
+      "name": "User Profile Resource",
+      "uri": "/profile",
+      "type": "http://w4tracking.com/profile",
+      "scopes": [
+        {
+          "name": "urn:w4tracking.com:scopes:profile:view"
+        }
+      ]
+    },
+    {
+      "name": "User Resource",
+      "uri": "/users/*",
+      "type": "http://w4tracking.com/users",
+      "scopes": [
+        {
+          "name": "urn:w4tracking.com:scopes:user:view"
+        },
+        {
+          "name": "urn:w4tracking.com:scopes:user:edit"
+        },
+        {
+          "name": "urn:w4tracking.com:scopes:user:delete"
+        }
+      ]
+    },
+    {
+      "name": "Company Resource",
+      "uri": "/companies/*",
+      "type": "http://w4tracking.com/companies",
+      "scopes": [
+        {
+          "name": "urn:w4tracking.com:scopes:company:create"
+        },
+        {
+          "name": "urn:w4tracking.com:scopes:company:view"
+        },
+        {
+          "name": "urn:w4tracking.com:scopes:company:edit"
+        },
+        {
+          "name": "urn:w4tracking.com:scopes:company:delete"
+        }
+      ]
+    },
+    {
+      "name": "Server Info Resource",
+      "uri": "/serverinfo",
+      "type": "http://w4tracking.com/serverinfo",
+      "scopes": [
+        {
+          "name": "urn:w4tracking.com:scopes:serverinfo:view"
+        }
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "name": "Only Owner Policy",
+      "description": "Defines that only the resource owner is allowed to do something",
+      "type": "js",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "code": "var context = $evaluation.getContext();\nvar identity = context.getIdentity();\nvar permission = $evaluation.getPermission();\n\nif (permission.getResource() && permission.getResource().getOwner() == identity.getId()) {\n    $evaluation.grant();\n}"
+      }
+    },
+    {
+      "name": "Only User Policy",
+      "description": "Defines that only users with role[user] are allowed to access",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"user\",\"required\":true}]"
+      }
+    },
+    {
+      "name": "Any User Policy",
+      "description": "Defines that only users from well known clients are allowed to access",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"user\"},{\"id\":\"manage-companies\",\"required\":true}]"
+      }
+    },
+    {
+      "name": "Any Admin Policy",
+      "description": "Defines that administrators can do something",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"admin\",\"required\":true}]"
+      }
+    },
+    {
+      "name": "Only From a Specific Client Address",
+      "description": "Defines that only clients from a specific address can do something",
+      "type": "js",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "code": "var contextAttributes = $evaluation.getContext().getAttributes();\n\nif (contextAttributes.containsValue('kc.client.network.ip_address', '127.0.0.1')) {\n    $evaluation.grant();\n}"
+      }
+    },
+    {
+      "name": "Administration Policy",
+      "description": "Defines that only administrators from a specific network address can do something.",
+      "type": "aggregate",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "applyPolicies": "[\"Only From a Specific Client Address\",\"Any Admin Policy\"]"
+      }
+    },
+    {
+      "name": "Only Owner and Administrators Policy",
+      "description": "Defines that only the resource owner and administrators can do something",
+      "type": "aggregate",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "applyPolicies": "[\"Administration Policy\",\"Only Owner Policy\"]"
+      }
+    },
+    {
+      "name": "User Resource Permission",
+      "description": "General policies that apply to all user resources.",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "defaultResourceType": "http://w4tracking.com/users",
+        "default": "true",
+        "applyPolicies": "[\"Any User Policy\",\"Administration Policy\"]"
+      }
+    },
+    {
+      "name": "Delete User Permission",
+      "description": "A policy that only allows the owner to delete himself.",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "applyPolicies": "[\"Only Owner and Administrators Policy\"]",
+        "scopes": "[\"urn:w4tracking.com:scopes:user:delete\"]"
+      }
+    },
+    {
+      "name": "Company Resource Permission",
+      "description": "General policies that apply to all company resources.",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "defaultResourceType": "http://w4tracking.com/companies",
+        "default": "true",
+        "applyPolicies": "[\"Any User Policy\",\"Administration Policy\"]"
+      }
+    },
+    {
+      "name": "Delete Company Permission",
+      "description": "A policy that only allows the owner to delete his companies.",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "applyPolicies": "[\"Only Owner and Administrators Policy\"]",
+        "scopes": "[\"urn:w4tracking.com:scopes:company:delete\"]"
+      }
+    },
+    {
+      "name": "View User Permission",
+      "description": "Defines who is allowed to view an user profile",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "applyPolicies": "[\"Only User Policy\"]",
+        "scopes": "[\"urn:w4tracking.com:scopes:profile:view\"]"
+      }
+    },
+    {
+      "name": "View Server Info Permission",
+      "description": "Defines who is allowed to view the server info",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "applyPolicies": "[\"Only User Policy\"]",
+        "scopes": "[\"urn:w4tracking.com:scopes:serverinfo:view\"]"
+      }
+    }
+  ],
+  "scopes": [
+    {
+      "name": "urn:w4tracking.com:scopes:profile:view"
+    },
+    {
+      "name": "urn:w4tracking.com:scopes:company:view"
+    },
+    {
+      "name": "urn:w4tracking.com:scopes:company:create"
+    },
+    {
+      "name": "urn:w4tracking.com:scopes:company:edit"
+    },
+    {
+      "name": "urn:w4tracking.com:scopes:company:delete"
+    },
+    {
+      "name": "urn:w4tracking.com:scopes:user:view"
+    },
+    {
+      "name": "urn:w4tracking.com:scopes:user:edit"
+    },
+    {
+      "name": "urn:w4tracking.com:scopes:user:delete"
+    },
+    {
+      "name": "urn:w4tracking.com:scopes:serverinfo:view"
+    }
+  ]
+}

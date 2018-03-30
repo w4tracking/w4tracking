@@ -2,14 +2,76 @@
   "realm": "w4tracking",
   "enabled": true,
   "sslRequired": "external",
-  "registrationAllowed": false,
+  "registrationAllowed": true,
+  "rememberMe": true,
   "requiredCredentials": [
     "password"
+  ],
+  "users": [
+    {
+      "username": "carlos",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "carlos"
+        }
+      ],
+      "realmRoles": [
+        "user",
+        "offline_access",
+        "uma_authorization"
+      ],
+      "clientRoles": {
+        "w4tracking-restful-api": [
+          "manage-companies"
+        ]
+      }
+    },
+    {
+      "username": "admin",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin"
+        }
+      ],
+      "realmRoles": [
+        "admin",
+        "offline_access",
+        "uma_authorization"
+      ],
+      "clientRoles": {
+        "realm-management": [
+          "realm-admin"
+        ],
+        "w4tracking-restful-api": [
+          "manage-companies"
+        ]
+      }
+    },
+    {
+      "username": "service-account-w4tracking-restful-api",
+      "enabled": true,
+      "email": "service-account-w4tracking-restful-api@placeholder.org",
+      "serviceAccountClientId": "w4tracking-restful-api",
+      "clientRoles": {
+        "w4tracking-restful-api": [
+          "uma_protection"
+        ]
+      }
+    }
   ],
   "roles": {
     "realm": [
       {
-        "name": "user"
+        "name": "user",
+        "description": "User privileges"
+      },
+      {
+        "name": "admin",
+        "description": "Administrator privileges"
       }
     ]
   },
@@ -20,23 +82,32 @@
   ],
   "clients": [
     {
-      "clientId": "w4tracking-restful-api",
-      "enabled": true,
-      "adminUrl": "/w4tracking-restful-api",
-      "baseUrl": "/w4tracking-restful-api",
-      "bearerOnly": true
-    },
-    {
       "clientId": "w4tracking-html5-client",
       "enabled": true,
-      "baseUrl": "/w4tracking-html5-client/index.html",
+      "adminUrl": "/w4tracking-html5-client",
+      "baseUrl": "/w4tracking-html5-client",
+      "publicClient": true,
+      "consentRequired": true,
+      "fullScopeAllowed": true,
       "redirectUris": [
         "http://localhost:4200/*"
       ],
       "webOrigins": [
         "http://localhost:4200"
+      ]
+    },
+    {
+      "clientId": "w4tracking-restful-api",
+      "secret": "secret",
+      "enabled": true,
+      "baseUrl": "/w4tracking-restful-api",
+      "authorizationServicesEnabled": true,
+      "redirectUris": [
+        "/w4tracking-restful-api/*"
       ],
-      "publicClient": true
+      "webOrigins": [
+        "http://localhost:8080"
+      ]
     }
   ],
   "keycloakVersion": "3.4.3.Final"
