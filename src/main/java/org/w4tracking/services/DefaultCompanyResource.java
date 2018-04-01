@@ -38,7 +38,7 @@ public class DefaultCompanyResource implements CompaniesResource {
 
     private CompanyRepresentation.CompanyData toData(CompanyModel model, CompanyRepresentation.CompanyAttributesRepresentation attributes) {
         URI self = uriInfo
-                .getAbsolutePathBuilder()
+                .getBaseUriBuilder()
                 .path(model.getId())
                 .build();
         LinksRepresentation links = new LinksRepresentation();
