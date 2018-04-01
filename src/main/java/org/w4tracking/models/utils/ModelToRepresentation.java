@@ -28,7 +28,7 @@ public class ModelToRepresentation {
         rep.setName(model.getName());
 
         if (fullInfo) {
-
+            rep.setDescription(model.getDescription());
         }
 
         return rep;

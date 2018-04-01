@@ -1,6 +1,10 @@
 package org.w4tracking.representations.idm;
 
+import javax.validation.constraints.NotNull;
+
 public class CompanyRepresentation {
+
+    @NotNull
     private CompanyData data;
 
     public CompanyRepresentation() {
@@ -23,7 +27,11 @@ public class CompanyRepresentation {
         private String id;
         private String type;
         private LinksRepresentation links;
+
+        @NotNull
         private CompanyAttributesRepresentation attributes;
+
+        @NotNull
         private CompanyRelationships relationships;
 
         public String getId() {
@@ -68,6 +76,8 @@ public class CompanyRepresentation {
     }
 
     public static class CompanyAttributesRepresentation {
+
+        @NotNull
         private String name;
         private String description;
 
@@ -89,6 +99,7 @@ public class CompanyRepresentation {
     }
 
     public static class CompanyRelationships {
+        @NotNull
         private CompanyOwnedBy ownedBy;
 
         public CompanyOwnedBy getOwnedBy() {
@@ -101,14 +112,15 @@ public class CompanyRepresentation {
     }
 
     public static class CompanyOwnedBy {
-        private UserRepresentation.UserData data;
+        @NotNull
+        private CompanyOwner data;
         private LinksRepresentation links;
 
-        public UserRepresentation.UserData getData() {
+        public CompanyOwner getData() {
             return data;
         }
 
-        public void setData(UserRepresentation.UserData data) {
+        public void setData(CompanyOwner data) {
             this.data = data;
         }
 
@@ -118,6 +130,28 @@ public class CompanyRepresentation {
 
         public void setLinks(LinksRepresentation links) {
             this.links = links;
+        }
+    }
+
+    public static class CompanyOwner {
+        @NotNull
+        private String id;
+        private String type;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
         }
     }
 

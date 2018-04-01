@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface CompanyProvider {
 
-    CompanyModel addCompany(String name);
+    CompanyModel addCompany(UserModel owner, String name);
 
     Optional<CompanyModel> getCompany(String id);
 
